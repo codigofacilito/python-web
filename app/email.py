@@ -10,7 +10,7 @@ def send_async_mail(message):
         mail.send(message)
 
 def welcome_mail(user):
-    message = Message('Bienvendio a el proyecto facilito',
+    message = Message('Bienvendio Proyecto Facilito',
                     sender=current_app.config['MAIL_USERNAME'],
                     recipients=[user.email])
 

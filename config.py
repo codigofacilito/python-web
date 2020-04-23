@@ -11,7 +11,7 @@ class DevelopmentConfig(Config):
     MAIL_SERVER = 'smtp.googlemail.com'
     MAIL_PORT = 587
     MAIL_USE_TLS = True
-    MAIL_USERNAME = config('MAIL_USERNAME', default='eduardo78@gmail.com')
+    MAIL_USERNAME = config('MAIL_USERNAME', default='correo@host.com')
     MAIL_PASSWORD = config('MAIL_PASSWORD', default='password123')
 
 class TestConfig(Config):
