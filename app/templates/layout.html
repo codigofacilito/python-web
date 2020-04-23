@@ -1,0 +1,67 @@
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+{% block title %}
+  <title>{{ title }}</title>
+{% endblock %}
+
+{% block navbar %}
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark static-top">
+  <div class="container">
+    <a class="navbar-brand" href="#"> </a>
+    <div>
+      <ul class="navbar-nav ml-auto">
+        {% if current_user.is_authenticated %}
+          <li class="nav-item  {% if active == 'tasks' %} active {% endif %}">
+            <a class="nav-link" href="{{ url_for('.tasks')}}">tareas</a>
+          </li>
+          <li class="nav-item {% if active == 'new_task' %} active {% endif %}">
+            <a class="nav-link" href="{{ url_for('.new_task')}}">nueva tarea</a>
+          </li>
+          <li class="nav-item ">
+            <a class="nav-link" href="{{ url_for('.logout')}}">logout</a>
+          </li>
+        {% else %}
+          <li class="nav-item {% if active == 'login' %} active {% endif %}">
+            <a class="nav-link" href="{{ url_for('.login') }}">login</a>
+          </li>
+          <li class="nav-item {% if active == 'register' %} active {% endif %}">
+            <a class="nav-link" href="{{ url_for('.register')}}">registro</a>
+          </li>
+        {% endif %}
+      </ul>
+    </div>
+  </div>
+</nav>
+{% endblock %}
+
+{% block content %}
+<div class="container">
+  <div class="row">
+
+    <div class="col-md-12 col-md-offset-1">
+      {% with messages = get_flashed_messages(with_categories=True) %}
+
+      {% if messages %}
+
+        {% for category, message in messages %}
+          {% if category == 'error' %}
+            <div class="alert alert-danger" role="alert">
+              {{ message }}
+            </div>
+          {% else %}
+            <div class="alert alert-success" role="alert">
+              {{ message }}
+            </div>
+          {% endif %}
+        {% endfor %}
+
+      {% endif %}
+
+      {% endwith %}
+    </div>
+
+    {% block container %}
+    {% endblock %}
+  </div>
+</div>
+{% endblock %}

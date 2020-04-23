@@ -1,0 +1,21 @@
+{% extends 'layout.html' %}
+
+{% block container %}
+<div class="card">
+  <div class="card-body">
+    <h5 class="card-title">{{task.title}}</h5>
+    <p class="card-text">
+      {{task.description}}
+    </p>
+  </div>
+
+  {% if current_user.is_authenticated and task.user_id == current_user.id %}
+    <a href="{{ url_for('.edit_task', task_id=task.id)}}" class="btn btn-primary">
+      Editar
+    </a>
+    <a href="{{ url_for('.delete_task', task_id=task.id)}}" class="btn btn-danger">
+      Eliminar
+    </a>
+  {% endif %}
+</div>
+{% endblock %}
